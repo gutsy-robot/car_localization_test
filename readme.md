@@ -14,6 +14,6 @@ The bag directory contains bag files created by running msg_corrector scripts(ht
 This is the how the rqt_graph and tf_tree for this package looks like:
 
 
-	![Alt text](resources/rosgraph.png) 
+![Alt text](resources/rosgraph.png) 
 
-	![Alt text](resources/frames.png)
+![Alt text](resources/frames.png)
