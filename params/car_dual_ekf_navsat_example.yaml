@@ -15,14 +15,14 @@ ekf_vo_imu1_odom:
   world_frame: odom
 
   odom0: vo_new 
-  odom0_config: [false, false, false,
+  odom0_config: [true, true, true,
+                 true, true, true,
+                 false,  false,  false,
                  false, false, false,
-                 true,  true,  true,
-                 false, false, true,
                  false, false, false]
   odom0_queue_size: 10
   odom0_nodelay: true
-  odom0_differential: false
+  odom0_differential: true
   odom0_relative: false
 
   
@@ -33,7 +33,7 @@ ekf_vo_imu1_odom:
                 true,  true,  true,
                 true,  true,  true]
   imu0_nodelay: false
-  imu0_differential: false
+  imu0_differential: true
   imu0_relative: false
   imu0_queue_size: 10
   imu0_remove_gravitational_acceleration: true
@@ -92,14 +92,14 @@ ekf_vo_imu1_imu2_odom:
   world_frame: odom
 
   odom0: vo_new 
-  odom0_config: [false, false, false,
+  odom0_config:  [true, true, true,
+                 true, true, true,
+                 false,  false,  false,
                  false, false, false,
-                 true,  true,  true,
-                 false, false, true,
                  false, false, false]
   odom0_queue_size: 10
   odom0_nodelay: true
-  odom0_differential: false
+  odom0_differential: true
   odom0_relative: false
 
   
@@ -107,10 +107,10 @@ ekf_vo_imu1_imu2_odom:
   imu0_config: [false, false, false,
                 true,  true,  false,
                 false, false, false,
-                true,  true,  true,
-                true,  true,  true]
+                false,  false,  false,
+                false,  false,  false]
   imu0_nodelay: false
-  imu0_differential: false
+  imu0_differential: true
   imu0_relative: false
   imu0_queue_size: 10
   imu0_remove_gravitational_acceleration: true
@@ -121,10 +121,10 @@ ekf_vo_imu1_imu2_odom:
   imu1_config: [false, false, false,
                 true,  true,  false,
                 false, false, false,
-                true,  true,  true,
-                true,  true,  true]
+                false,  false,  false,
+                false,  false,  false]
   imu1_nodelay: false
-  imu1_differential: false
+  imu1_differential: true
   imu1_relative: false
   imu1_queue_size: 10
   imu1_remove_gravitational_acceleration: true
@@ -168,7 +168,80 @@ ekf_vo_imu1_imu2_odom:
 
 
 
+ekf_rtabmap_odom_imu1_odom:
+  frequency: 30
+  sensor_timeout: 0.1
+  two_d_mode: false
+  transform_time_offset: 0.0
+  transform_timeout: 0.0
+  print_diagnostics: true
+  debug: false
 
+  map_frame: map
+  odom_frame: odom
+  base_link_frame: base_link
+  world_frame: odom
+
+  odom0: rtabmap/odom
+  odom0_config: [true, true, true,
+                 true, true, true,
+                 false,  false,  false,
+                 false, false, false,
+                 false, false, false]
+  odom0_queue_size: 10
+  odom0_nodelay: true
+  odom0_differential: true
+  odom0_relative: false
+
+  
+  imu0: imu_new
+  imu0_config: [false, false, false,
+                true,  true,  false,
+                false, false, false,
+                false,  false,  false,
+                false,  false,  false]
+  imu0_nodelay: false
+  imu0_differential: true
+  imu0_relative: false
+  imu0_queue_size: 10
+  imu0_remove_gravitational_acceleration: true
+
+
+
+
+  use_control: false
+
+  process_noise_covariance: [1e-3, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    1e-3, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    1e-3, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0.3,  0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0.3,  0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0.01, 0,     0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0.5,   0,     0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0.5,   0,    0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0.1,  0,    0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0,    0.3,  0,    0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0.3,  0,    0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0.3,  0,    0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0.3,  0,    0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0.3,  0,
+                             0,    0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0.3]
+
+  initial_estimate_covariance: [1e-9, 0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    1e-9, 0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    1e-9, 0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    1.0,  0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    1.0,  0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    1e-9, 0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    1.0,  0,    0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    1.0,  0,    0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    1.0,  0,     0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    0,    1.0,   0,     0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     1.0,   0,     0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     1.0,   0,    0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     1.0,  0,    0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    1.0,  0,
+                                0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    1.0]
 
 ekf_se_map:
   frequency: 30
@@ -185,24 +258,24 @@ ekf_se_map:
   world_frame: map
 
   odom0: vo_new
-  odom0_config: [false, false, false,
+  odom0_config: [true, true, true,
+                 true, true, true,
+                 false,  false,  false,
                  false, false, false,
-                 true,  true,  true,
-                 false, false, true,
                  false, false, false]
   odom0_queue_size: 10
   odom0_nodelay: true
-  odom0_differential: false
+  odom0_differential: true
   odom0_relative: false
 
   imu0: imu_new
   imu0_config: [false, false, false,
                 true,  true,  false,
                 false, false, false,
-                true,  true,  true,
-                true,  true,  true]
+                false,  false,  false,
+                false,  false,  false]
   imu0_nodelay: false
-  imu0_differential: false
+  imu0_differential: true
   imu0_relative: false
   imu0_queue_size: 10
   imu0_remove_gravitational_acceleration: true
@@ -212,10 +285,10 @@ ekf_se_map:
   imu1_config: [false, false, false,
                 true,  true,  false,
                 false, false, false,
-                true,  true,  true,
-                true,  true,  true]
+                false,  false,  false,
+                false,  false,  false]
   imu1_nodelay: false
-  imu1_differential: false
+  imu1_differential: true
   imu1_relative: false
   imu1_queue_size: 10
   imu1_remove_gravitational_acceleration: true
@@ -230,7 +303,7 @@ ekf_se_map:
                  false, false, false]
   odom1_queue_size: 10
   odom1_nodelay: true
-  odom1_differential: false
+  odom1_differential: true
   odom1_relative: false
 
 

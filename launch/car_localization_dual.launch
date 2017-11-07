@@ -13,6 +13,9 @@
     <remap from="odometry/filtered" to="odometry/vo_imu1_imu2_odom"/>
   </node>
 
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_rtabmap_odom_imu1_odom" clear_params="true" output="screen">
+    <remap from="odometry/filtered" to="odometry/vo_rtabmap_imu1_odom"/>
+  </node>
 
 
   <!--                       INSTANCE FOR FUSING VO, IMU1, IMU2 AND GPS                                                 -->
@@ -30,13 +33,13 @@
 
 
   <!--Currently using Static transforms, might be inaccurate-->
-  <node pkg="tf2_ros" type="static_transform_publisher" name="bl_zed" args="0 0.0 0.5 0.0 0.0 0.0 1.0 base_link zed_link" />
+  <!--node pkg="tf2_ros" type="static_transform_publisher" name="bl_zed" args="0 0.0 0.5 0.0 0.0 0.0 1.0 base_link zed_link" />
   <node pkg="tf2_ros" type="static_transform_publisher" name="bl_gps" args="0 -2.0 1.0 0 0 0 1 base_link gps"/>
   <node pkg="tf2_ros" type="static_transform_publisher" name="bl_imu" args="0 -2.0 1.0 0 0 0 1 base_link imu"/>
-  <node pkg="tf2_ros" type="static_transform_publisher" name="bl_imu2" args="0 -2.0 1.0 0 0 0 1 base_link imu2"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="bl_imu2" args="0 -2.0 1.0 0 0 0 1 base_link imu2"/-->
 
   <!--for playing rosbags-->
-  <node pkg="rosbag" type="play" name="rosbagplay" args="$(find robot_localization)/bag/all_sensors.bag --clock -d 5"  required="true"/> 
+  <!--node pkg="rosbag" type="play" name="rosbagplay" args="$(find robot_localization)/bag/all_sensors.bag --clock -d 5"  required="true"/--> 
  
 
 </launch>
